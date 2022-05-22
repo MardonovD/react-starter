@@ -1,23 +1,32 @@
 import React, { useState } from "react";
-
+import BtnIncrDecr from "./components/BtnIncrDecr";
+import "./style/styles.css";
 function App() {
-  const [count, setCount] = useState(0);
+  const [toggleBtn, setToggleBtn] = useState(false);
+  const [value, setValue] = useState("dos");
 
-  function inc() {
-    setCount((prev) => prev + 1);
-  }
-  function dec() {
-    setCount((prev) => prev - 1);
-  }
   return (
     <>
-      <h3>Count:{count}</h3>
-      <button onClick={inc} className="btn btn-success">
-        INCR
-      </button>
-      <button onClick={dec} className="btn btn-danger">
-        DECR
-      </button>
+      <div className="app w-50 mx-auto">
+        <BtnIncrDecr />
+        <hr />
+        <p>Value:{value}</p>
+        <input
+          type="text"
+          className="form-control"
+          value={value}
+          onChange={(event) => {
+            setValue(event.target.value);
+          }}
+        />
+        <button
+          onClick={() => setToggleBtn(!toggleBtn)}
+          className="btn btn-secondary"
+        >
+          Toggle Btn
+        </button>
+        {toggleBtn ? <p className="lead">You tube content...</p> : null}
+      </div>
     </>
   );
 }
