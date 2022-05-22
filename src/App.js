@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import TableList from "./components/TableList";
+import MyButton from "./components/UI/button/MyButton";
 
 import "./style/styles.css";
 function App() {
@@ -41,6 +42,9 @@ function App() {
           className="form-control my-3"
           placeholder="Enter your favourite stackk"
         />
+        <MyButton disabled >
+          Add Post
+        </MyButton>
       </form>
       <TableList posts={posts} title="Programming Language" />
     </div>
