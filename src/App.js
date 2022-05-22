@@ -31,9 +31,18 @@ function App() {
 
   const [title, setTitle] = useState("");
   const [stack, setStack] = useState("");
+
   const addPost = (e) => {
     e.preventDefault();
-    console.log(title);
+
+    const newPost = {
+      id: Date.now(),
+      title,
+      stack,
+    };
+    setPosts([...posts, newPost]);
+    setTitle("");
+    setStack("");
   };
   return (
     <div className="app w-50 mx-auto">
@@ -51,8 +60,8 @@ function App() {
           type="text"
           className="form-control my-3"
           placeholder="Enter your favourite stack"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={stack}
+          onChange={(e) => setStack(e.target.value)}
         />
 
         <MyButton onClick={addPost}>Add Post</MyButton>

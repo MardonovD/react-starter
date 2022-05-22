@@ -8,8 +8,8 @@ const TableList = ({ posts, title }) => {
       <table className="table table-striped">
         <TableIHeader />
         <tbody>
-          {posts.map((post) => (
-            <TableItem post={post} key={post.id} />
+          {posts.map((post, index) => (
+            <TableItem number={index + 1} post={post} key={post.id} />
           ))}
         </tbody>
       </table>
