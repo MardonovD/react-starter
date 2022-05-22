@@ -1,29 +1,34 @@
 import React, { useState } from "react";
 
+import TableList from "./components/TableList";
+
 import "./style/styles.css";
 function App() {
+  const [posts, setPosts] = useState([
+    {
+      id: 1,
+      title: "JavaScript",
+      stack: "Mern-Stack",
+    },
+    {
+      id: 2,
+      title: "Python",
+      stack: "Full-Stack",
+    },
+    {
+      id: 3,
+      title: "C#",
+      stack: "Cyber",
+    },
+    {
+      id: 4,
+      title: "Goo",
+      stack: "Back-End",
+    },
+  ]);
   return (
     <div className="app w-50 mx-auto">
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Programming </th>
-            <th>Stack</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>JavaScript</td>
-            <td>Mern-Stack</td>
-            <td>
-              <button className="btn btn-outline-danger">delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <TableList posts={posts} />
     </div>
   );
 }
