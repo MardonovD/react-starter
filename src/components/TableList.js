@@ -1,7 +1,7 @@
 import React from "react";
 import TableIHeader from "./TableIHeader";
 import TableItem from "./TableItem";
-const TableList = ({ posts, title }) => {
+const TableList = ({ posts, title, remove }) => {
   return (
     <>
       <h4 className="text-center">{title}</h4>
@@ -9,7 +9,12 @@ const TableList = ({ posts, title }) => {
         <TableIHeader />
         <tbody>
           {posts.map((post, index) => (
-            <TableItem number={index + 1} post={post} key={post.id} />
+            <TableItem
+              remove={remove}
+              number={index + 1}
+              post={post}
+              key={post.id}
+            />
           ))}
         </tbody>
       </table>

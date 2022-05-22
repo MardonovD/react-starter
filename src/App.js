@@ -34,10 +34,30 @@ function App() {
     setPosts([...posts, newPost]);
   };
 
+  const removePost = (post) => {
+    setPosts(posts.filter((s) => s.id !== post.id));
+  };
+
   return (
     <div className="app w-50 mx-auto">
       <PostForm createPost={createPost} />
-      <TableList posts={posts} title="Programming Language" />
+      <div className="d-flex justify-content-end my-2">
+        <select className="form-select w-50">
+          <option value="val">Sorted By Title</option>
+          <option value="val">Sorted By Job</option>
+        </select>
+      </div>
+      {posts.length ? (
+        <TableList
+          remove={removePost}
+          posts={posts}
+          title="Programming Language"
+        />
+      ) : (
+        <h5 style={{ color: "red", textAlign: "center ", marginTop: "20px" }}>
+          Sizda hech qanday malumotlar mavjud emas...
+        </h5>
+      )}
     </div>
   );
 }
