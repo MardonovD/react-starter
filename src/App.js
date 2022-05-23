@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PostForm from "./components/PostForm";
-
+import MySelect from "./components/UI/select/MySelect";
 import TableList from "./components/TableList";
 import MyButton from "./components/UI/button/MyButton";
 import MyInput from "./components/UI/input/MyInput";
@@ -30,6 +30,17 @@ function App() {
     },
   ]);
 
+  const [select, setSelect] = useState("");
+  const [search, setSearch] = useState("");
+
+  function getSortedPosts() {
+    console.log("render");
+    if (select) {
+      return [...posts].sort((a, b) => a[select].localeCompare(b[select]));
+    }
+    return posts;
+  }
+  const sortedPost = getSortedPosts();
   const createPost = (newPost) => {
     setPosts([...posts, newPost]);
   };
@@ -38,19 +49,34 @@ function App() {
     setPosts(posts.filter((s) => s.id !== post.id));
   };
 
+  const sortPost = (sort) => {
+    setSelect(sort);
+    setPosts(sortedPost);
+  };
+
   return (
     <div className="app w-50 mx-auto">
       <PostForm createPost={createPost} />
-      <div className="d-flex justify-content-end my-2">
-        <select className="form-select w-50">
-          <option value="val">Sorted By Title</option>
-          <option value="val">Sorted By Job</option>
-        </select>
+      <div className="d-flex justify-content-between my-2">
+        <MyInput
+          onChange={(e) => setSearch(e.target.value)}
+          value={search}
+          placeholder="search"
+        />
+        <MySelect
+          value={select}
+          onChange={sortPost}
+          defaultValue="Sorted By"
+          options={[
+            { value: "title", name: "Programming" },
+            { value: "stack", name: "Jobs" },
+          ]}
+        />
       </div>
       {posts.length ? (
         <TableList
           remove={removePost}
-          posts={posts}
+          posts={sortedPost}
           title="Programming Language"
         />
       ) : (
